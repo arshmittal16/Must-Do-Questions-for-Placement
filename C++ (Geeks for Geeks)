@@ -1,0 +1,706 @@
+C++ (Geeks for Geeks)
+
+C++ Introduction:
+
+C++ faster coz compiled lang, Java Py Interpreter Lang (converted into binary and run one by one).
+- Allows to do Low Level programming (pointers)
+- Speed of execution (no garbage collection)
+- derived from C but richer Library than C
+- Java takes more time to run against large no of test cases.
+
+- preprocessor runs before the compiler and contains the 		process of how the code has to be run.
+- never use void main() in C++
+- need to compile everytime you change the code. Java doesnt 	need to be compiled as it is machine independent.
+
+I/O in C++:
+cin, cout 
+cerr, clog - used for error handling
+input is buffered, doesnt wait for you to enter any input
+\n vs endl
+endl flushes the buffer
+
+Variables and Data Types:
+- Can not begin with a number
+- char - 1 byte: -128 - 127
+- unsigned char: 0 -255
+- int - 4 byte
+- long int: 4 bytes
+- long long int: 8 bytes
+- float: 
+- double:
+- bool: 1 byte
+global variables have default value = 0 
+local variables can have any garbage value;
+
+=firstly variable is looked into the scope {}
+=static int x means humesha vahi rahega variable. 
+=const int x means the value will be constant and hence cant be 	changed
+
+Errors in C++:
+- Syntax Error
+	Errors in language (like not including ;)
+- Semantic Error
+	Error which doesnt make sense (like 16=x)
+- Linker Error
+	Variables def not present
+- Runtime Error
+	errors coming when a program is being run (like x/y and y=0)
+- Logical Errors
+
+Operators in C++:
+x++ = old value + 1;
+++x = 1 + old value;
+Uses BODMAS
++= , -=
+
+Loops:
+- repeating anything
+- to iterate through arrays, strings, etc
+- to run something forever
+
+Jump Statements:
+Continue
+Break: Breaks the loop
+Return: takes you out of the fn itself
+goto: goes to the specific part 
+_________________________________________________________________
+
+Functions in C++:
+begins with main function
+
+- Duplicating code
+- Easy modulations
+- Abstraction (Allow to use a fn without knowing how it works)
+
+Inline Functions:
+inline int square (int x)
+
+Function Overloading:
+void print(int x)
+void print(float x)
+both works but return type should be same
+
+int add(int a, int b, int c=0, int d=0): 2,3,4 any no of inputs
+
+Recursions:
+Function calling itself
+main() can also be a recursive function
+________________________________________________________________
+
+Arrays:
+Continuous allocation of memory
+Indexing begins with 0
+int arr[]; WRONG 
+int arr[n]; OKAY
+Not allocated values - garbage value
+Any no of allocated value - everyother assigned 0
+no of elements in array = sizeof(arr) / sizeof(int)
+~Arrays are passed as pointers 
+
+Adv:
+- random access
+- cache friendliness
+- accessed faster
+
+Disad:
+- Need to tell the compiler the size beforehand (Soln: Vectors)
+- Addition/Deletion is tough.
+
+
+*max_element(arr, arr+n)
+*max_element(v.begin(),v.end())
+
+#include<numeric>
+sum = accumulate(arr, arr+n)
+
+MultiDimensional Arrays:
+int arr[n][m]
+
+Strings:
+1. C-style Strings:
+
+char str = "string"; (includes \0 at the end, marks the end)
+getline(cin, n) doesnt stop unless you hit enter
+for (char x: str)
+	cout<<x;
+
+cout<<sizeof(str)
+will print 4 as it will also count \0
+
+char str = {'g','f','g','\0'};
+In this scenario, \0 is not added
+
+Functions of C-Style Strings:
+	strlen(str) - find the length of the string
+	strcmp(s1,s2) - compares two strings lexicographically
+	strcpy(s1,s2):
+		char str[5];
+		str = "gfg" //wont work as you cant assign str to something like 1=2 cant be done
+		strcpy(str, "gfg");
+		cout<<str;
+
+2. C++ Strings:
+	Richer Lib
+	+,<,>,==...
+	Can assign a string later
+	do not have to worry abt size
+	can be converted to CS String easily
+
+	string str;
+	str = "gfg";
+	cout<<str.length()<<" "; 	// 3
+	str = str + "xyz";
+	cout<<str<<" "				// gfgxyz
+	cout<<str.substr(1,3); 		// fgx (starting index, size)
+	cout<<str.find("gxy"); 		// 2 - returns the index where found (string::npos agar nahi mila kahin bhi kuch)
+____________________________________________________________________
+
+References:
+	int x=10;
+	int &y = x;
+
+	Avoid copying of large objects during function calls
+	Avoid mixing of data, like swaaping the number without passing reference
+	Modifications in for each loop
+	Avoiding copy of large objects in for each loop
+
+	-> Must be assigned when declared
+	-> Cant be NULL
+	-> Easier to use
+	-> Cant refer to another location.
+
+#######	########
+POINTERS:
+	* : gives the value of the address
+	stores the addresses of other variables
+
+	Variable|| Value ||Address
+	--------||-------||-------
+		x   || 10    || 0x1234
+		ptr ||0x1234 || 0x1238
+
+		x=10;
+		*ptr = &x;
+		cout<<*ptr; 	//10
+		x=x+30			
+		cout<<*ptr;		//40
+		cout<<ptr;		//0x1234
+		*ptr = * ptr + 40
+		cout<<*ptr;		//80
+
+		Applications:
+			Changing Passed Parameters
+			Passing Large Objects
+			Dynamic Memory Allocation
+			Returning Multiple Values
+			Accessing Array Elements
+
+			int arr[]={1,2};
+			int *p1 = arr;
+			++*p1; 						// ++(*p1)
+			cout<<arr[0]<<arr[1]<<*p1;
+			return 0;
+
+			Output: 11,20,11
+
+			int arr[]={1,2};
+			int *p2 = arr;
+			*p2++; 						// *(p2++)
+			cout<<arr[0]<<arr[1]<<*p2;
+			return 0;
+
+			Output: 10,20,20			
+-----------------------------------------------------------
+
+Structs in C++:
+	struct Point
+	{
+		int x;
+		int y;
+	};
+
+	int main()
+	{
+		Struct Point p;		//writing struct is mandatory in C but optional in C++
+		p.x = 10;
+		p.y = 20;
+		cout<<p.x<<p.y;
+	}
+
+	In C:
+	typedef struct point
+	{
+		int x;
+		int y;
+	}P;						//P is a short cut to struct point (struct point = P)
+
+	int main()
+	{
+		P a;
+		a.x = 10;
+		a.b = 20;
+	}
+
+	----
+	struct Student 
+	{
+		int roll;
+		string name;
+		string address;
+	};
+
+	int main()
+	{
+		Student s = {101,"Arsh","Mittal"};
+		cout<<s.roll<<s.name<<s.address;
+	}
+
+	Struct - Public by default
+	Class - Private by default
+
+	Data Hiding jab use karna ho to classes
+	Structs jab bundle karna ho kuch cheezo ko
+
+	Default inheritance is private in class
+	Default inheritance is public in Struct
+	---------------------------------------
+
+Structure Alignment:
+	Whole Alignment is made according to the largest datatype member
+	char char double < char double char
+	double char char = char char double
+
+	we should always go either in increasing order of datatype size or decreasing order
+	
+Unions in C++:
+	union test
+	{
+		int x;
+		int y;
+	};
+
+	int main()'
+	{
+		test t;
+		t.x=10;
+	}
+
+	int alag char alag double alag
+	-------------
+	|           |				//pura dabba ek hi variable
+	-------------
+
+	Applications:
+		Type Punning:
+			
+Dynamic Memory Allocation:
+	stored in heap
+	auto variables stored only till function is running
+	static or global variables for lifetime
+
+	int *ptr = new int[5];
+	space for 5 integers
+	*(ptr+2) = 10;
+	delete [] ptr;
+	delete ptr;
+	
+Exception Handling:
+	Divide by 0
+	No heap memory available
+	accessing array elements outside the allowed index range
+	pop from an empty stack
+
+	try{
+		try if the code works
+	} 
+	throw: used to throw a variable
+	catch: one or more catch blocks are used to handle the Exception
+
+	try 
+	{
+		if (y==0)
+			throw 0;
+		cout<<x/y;
+	}
+	catch(int x)
+	{
+		cout<<"Divisor is Zero";
+	}
+
+	catch(...): catches all datatypes
+
+Smart Pointers:
+	Used because normal pointers have problems like Memory Leak
+	used by wrapping pointers into a class
+
+-------------------------------------------------------------------
+
+Object Oriented Programming:
+
+CLass: datatype with Functions
+Object: varibale of a class
+
+private members: cant be accessed outside the class
+	abstraction (hiding internal things)
+	encapsulation (bundling things together inside the class, related data and fns together)
+	inheritance: no need to write a common code again
+public members: can be accessed outside the class	
+
+polymorphism: one name many functionalities
+	same name functions depending upon the arguments passed.
+
+	
+This Pointer:
+	helps in storing same name variables
+	this -> x = x
+	helps in bundling functions
+
+Inheritance	& Virtual Functions:
+	reusability 
+	Protected Access Specifier
+	not accessible outside class except inherited classes
+
+	Syntax:
+		class Person
+		{
+			protected:
+				string name;
+				int id;
+		};
+
+		class Student: public Person{
+			private:
+				int marks;
+			public:
+				void print()
+				{
+					cout<<name<<" " <<id<<" "<<marks<<endl;
+				}
+		}
+
+	public: protected and public of base class remains as they are
+	private: protected and public of base class become private
+	protected: protected and public of base class become protected
+
+	Virtual Functions:
+	
+	class base{
+		public:
+			Virtual void print() { cout<<"Base\n";}
+	};
+	class derived{
+		public:
+			void print() { cout<<"Derived\n";}
+	};
+
+Multiple Inheritance:
+	A	B
+	^	^
+	|	|	
+	-----
+	  |
+	  C
+
+	  A
+	  ^
+	  |
+	  B
+	  ^
+	  |
+	  C				//Multi Level Inheritance
+
+class A{};
+class B{};
+class C: public A, public B{};
+int main()
+{
+	C obj;
+}
+
+Diamond Problem:
+class A{
+	public:
+		int x;
+};
+
+class B: public A {};			//error		(class B: Virtual public A {};)
+class C: public A {};			//error		(class C: Virtual public A {};)
+class D: public B, public C {};
+int main()
+{
+	D d;
+	cout<<d.x;
+}
+
+Operator Overloading:
+	complex Operator +
+	{
+		complex res;
+		res.real=real + obj.real;
+		res.img=img+obj.img;
+	}
+
+	Use of it?
+		C4 = C1 + C2*C3 			C4 = C1.add(C2.multiply(C3))
+
+Friend Functions:
+	a friend can access all private protected and public members of a class
+	Java doesnt support Friend Function as it is against encapsulation policy, yet C++ allows it
+	granted not requested
+	mutual
+	not transitive
+	not inherited
+
+#####################
+Analysis of Algorithms:
+---------------------
+
+Asymptotic Analysis:
+	measure the order of growth for Algorithms
+
+Analysis of Recursions:
+	T(n) = T(n/2) + c
+
+--------------------
+
+Arrays:
+	Adv:
+		Random Access
+		Cache Friendliness
+		
+	Fixed Sized Arrays:
+		int arr[100]
+		int arr[n]
+		int arr[]={1,2,3,4}
+
+	Dynamic Sized Array:
+		Vectors
+
+Operations:
+	Searching an element
+		Linear Search - O(n) -- unsorted
+		if (arr[i]==x)
+			return i;
+		return -1;
+
+		Binary Search - O(logn)
+		in sorted array only
+		
+	Inserting an element
+		right shifting
+		i = n-1; i>=index; i--
+		O(n)
+		at the end O(1)
+		at the beginning O(n)
+
+	Deletion of an element
+		finding the index to be deleted
+			linear Search
+		
+		int i;
+		for (i=0; i<n;i++)
+			break when index found
+		if (i==n)
+			return n;
+		for (int j=i;j<n-1;j++)
+			arr[j]=arr[j+1]
+			return n-1;
+
+	Reversing an array:
+		simple swapping till elements are reversed
+			{10,5,7,30} -> {30, 7, 5, 10}
+			void reverse(int arr[], int n)
+			{
+				int low = 0, high = n-1;
+				while (low<high)
+				{
+					int temp = arr[low];
+					arr[low] = arr[high];
+					arr[high] = temp;
+					low++;
+					high--;
+				}
+			}
+
+	Removing Duplicates from a sorted array:
+		Naive Approach -> creating another temp array and storing the numbers only once
+			Time - O(n)
+			Space - O(n)
+
+		Efficient Approach:
+			int remove(int arr[], int n)
+			{
+				int res = 1;
+				for (int i=1;i<n;i++)
+				{
+					if (arr[i]!=arr[res-1])
+					{
+						arr[res] = arr[i];
+						res++;
+					}
+				}
+				return res;
+			}
+
+	Left Rotation of an array by one:
+		void Rotation(int arr[], int n)
+		{
+			int temp = arr[0];
+			for (int i=1;i<n;i++)
+			{
+				arr[i-1]=arr[i];
+			}
+			arr[n-1] = temp;
+		}
+----------------		 
+Recursions:
+	Applications:
+		Many algos are based on Recursions
+		Dynamic Programming
+		BackTracking
+		Divide and Conquer
+
+		Many problems are based on Recursions
+		Tower of Hanoi
+		DFS based traversals
+
+		void num(int n)
+		{
+			if (n==0)
+				return;
+			num(n/2);				//Converts n into binary
+			cout<<n%2;
+		}
+
+	Printing N to 1 using Recursions
+		void nto1 (int n)
+		{
+			if (n==0)
+				return
+			cout<<n<<" ";
+			nto1(n-1);
+		}
+
+	Printing 1 to n using Recursions
+		void 1ton (int n)
+		{
+			if (n==0)
+				return
+			nto1(n-1);
+			cout<<n<<" ";
+		}
+
+	Tail Recursions:
+		take lesser time than normal Recursions
+		when the recursive call is made at the end
+	
+	Factorial using Recursions:
+		int fact(int n)
+		{
+			if (n==0)
+				return 1;
+			
+			return n*fact(n-1);
+		}
+
+	Fibonacci using Recursions:
+		int fib(int n)
+		{	
+			if (n==0)
+				return 0;
+			if (n==1)
+				return 1;
+
+			return fib(n-1) + fib(n-2);
+		}
+
+	Sum of first N numbers using Recursions:
+		int sum(int n)
+		{
+			if (n==0)
+				return 0;
+			return n+sum(n-1);
+		}
+
+	Palindrome check using Recursions:
+		bool palindrome(string $str, int begin, int end)
+		{
+			if (start>=end)
+				return true;
+			
+			return (str[begin]==str[end]) && palindrome(str, beign + 1, end-1);
+		}
+
+	Sum of digits in a number:
+		int sum (int n)
+		{
+			if (n<10)
+				return n;
+			
+			return sum(n/10) + n%10;
+		}
+
+	Printing all subsets of a string:
+		void printsub(string str, string curr = "", index = 0)
+		{
+			if (index==str.length())
+			{
+				cout<<curr<<" ";
+				return;
+			}
+
+			printsub(str, curr, index+1);
+			printsub(str, curr+str[index], index+1);
+		}
+
+	TOWER OF HANOI:
+		void TOH(int n, char A, char B, char C)
+		{
+			if (n==1)
+			{
+				cout<<"Move 1 from "<<A<<" to "<<C<<endl;
+			}
+
+			TOH(n-1, A, C, B);
+			cout<<"Move "<<n<<" from "<<A<<" to " <<C << endl;
+			TOH(n-1, B, A, C);
+		}
+
+__________________________
+
+HASHING
+	Search, Insertion, Delete - O(1) time
+	Not Useful for:
+		Finding closest value
+		Sorted Data
+		Prefix Searching
+	
+	Direct Address Table:
+		Creating a boolean array and marking the cell as 1 when inserted
+		Insertion -
+		Deletion   |	-> O(1) Time
+		Searching -
+
+	Large keys and floating and strings cant be used in hashing
+
+	Hashing Functions:
+		h = large_key % m 
+		m - prime number preferred.
+
+		for strings - weighted sum
+
+		universal hashing
+
+	Collission Handling:
+		1. Chaining
+		2. Open Addressing:
+			a. Linear Probing
+			b. Quadratic Probing
+			c. Double Hashing
+
+	Chaining:
+		hash(key) = key%7
+		0 - 1 - 2 - 3 - 4 - 5 - 6 
+
+		Linked List Headers
+		
