@@ -21,3 +21,27 @@
 
 def sort012(arr,n):
     arr.sort()
+
+## Without using any inbuilt function
+
+def sort012(arr,n):
+    c0, c1, c2 = 0, 0, 0
+    
+    for i in range(n):
+        if arr[i] == 0:
+            c0 += 1
+        elif arr[i] == 1:
+            c1 += 1
+        else:
+            c2 += 1
+        
+    for i in range(c0):
+        arr[i] = 0
+    
+    for i in range(c1):
+        arr[c0 + i] = 1
+    
+    for i in range(c2):
+        arr [c0 + c1 + i] = 2
+        
+    return arr
