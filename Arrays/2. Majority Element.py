@@ -21,6 +21,8 @@
 # Expected Time Complexity: O(N).
 # Expected Auxiliary Space: O(1).
 
+## Way 1
+
 def majorityElement(arr,n):
     
     arr.sort()
@@ -48,4 +50,14 @@ def majorityElement(arr,n):
                 return element
     return -1
             
+## Way 2
+
+def majorityElement(arr,n):
+    arr.sort()
+
+    for i in range(n):
+        if (arr.count(arr[i])>n/2):
+            return arr[i]
+
+    return -1
     
