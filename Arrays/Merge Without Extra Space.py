@@ -28,10 +28,14 @@
 
 def merge(self, arr1, arr2, n, m): 
         
-        for i in range(n):
-            for j in range(m):
-                
-                if arr1[i]>arr2[j]:
-                    arr1[i], arr2[j] = arr2[j], arr1[i]
-                    
-        arr2.sort()    
+    i=n-1
+    j=0
+        
+    while(i>=0 and j<m):
+        if arr1[i]>arr2[j]:
+            arr2[j],arr1[i]=arr1[i],arr2[j]
+            j+=1
+        i-=1
+        
+    arr1.sort()   
+    arr2.sort()
