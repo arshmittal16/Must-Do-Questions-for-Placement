@@ -15,3 +15,24 @@
 # Thus maximum length of subarray having
 # equal number of 0's and 1's is 4.
 
+def maxLen(arr, N):
+    
+    for i in range(N):
+        if arr[i]==0: arr[i] = -1  
+    
+    sum = 0
+    maxe = 0
+    
+    dic = {}
+    
+    for i in range(N):
+        sum += arr[i]
+        
+        if sum == 0:
+            maxe = i+1
+        if sum in dic:
+            maxe = max(i-dic[sum], maxe)
+        else:
+            dic[sum] = i
+    
+    return maxe 
